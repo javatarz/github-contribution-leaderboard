@@ -10,12 +10,32 @@ class PullRequest:
             kwargs['issues_data']['labels'])
         self._created_at = PullRequest._parse_date(
             kwargs['issues_data']['created_at'])
+        self._owner = kwargs['pr_data']['base']['repo']['owner']['login']
+        self._pr_raised_by = kwargs['pr_data']['head']['user']['login']
         self._merged = kwargs['pr_data']['merged']
 
     def is_spam(self):
         return 'invalid' in self._labels or 'spam' in self._labels
 
     def score(self) -> int:
+        if self._owner == self._pr_raised_by:
+            return self._self_pr_score()
+        else:
+            return self._pr_score()
+
+    def _self_pr_score(self) -> int:
+        if self._merged:
+            return 5
+        elif self._state == 'closed':
+            return 1
+        elif self.is_spam():
+            return -10
+        elif self._state == 'open':
+            return 1
+        else:
+            return 0
+
+    def _pr_score(self) -> int:
         if self._merged:
             return 10
         elif self._state == 'closed':
