@@ -13,10 +13,19 @@ class PullRequest:
         self._merged = kwargs['pr_data']['merged']
 
     def is_spam(self):
-        'invalid' in self._labels or 'spam' in self._labels
+        return 'invalid' in self._labels or 'spam' in self._labels
 
     def score(self) -> int:
-        return 1
+        if self._merged:
+            return 10
+        elif self._state == 'closed':
+            return 3
+        elif self.is_spam():
+            return -5
+        elif self._state == 'open':
+            return 1
+        else:
+            return 0
 
     def created_between(self, start_date: datetime, end_date: datetime) -> bool:
         return start_date <= self._created_at <= end_date
