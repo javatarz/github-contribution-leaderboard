@@ -7,5 +7,5 @@ pip install pipenv
 
 ## Usage
 ```
-python stats.py -at <key>
+python stats.py -at <key> -u <user1> <user2>
 ```
