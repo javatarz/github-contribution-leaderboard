@@ -1,5 +1,5 @@
 (() => {
-  const URL = 'data.json';
+  const URL = 'http://localhost:5000/data.json';
   const INTERVAL = 10000;
 
   const fetchLeaderBoard = () => {
@@ -17,7 +17,7 @@
     xhr.send();
   };
 
-  const createLeaderBoardTable = ({response}) => {
+  const createLeaderBoardTable = ({ response }) => {
     const tableBody = document.getElementsByTagName('tbody')[0];
 
     JSON.parse(response).forEach((row, index) => {
@@ -25,18 +25,18 @@
         tableBody.deleteRow(index);
       }
 
-      const {imageUrl, name, score} = row;
+      const { avatar, user_name, score } = row;
 
       const tr = tableBody.insertRow(index);
       const cell1 = tr.insertCell(0);
       const cell2 = tr.insertCell(1);
 
       const avatarImage = document.createElement('img');
-      avatarImage.setAttribute('src', imageUrl);
+      avatarImage.setAttribute('src', avatar);
       avatarImage.setAttribute('alt', name);
 
       const avatarName = document.createElement('span');
-      avatarName.innerText = name;
+      avatarName.innerText = user_name;
 
       cell1.appendChild(avatarImage);
       cell1.appendChild(avatarName);

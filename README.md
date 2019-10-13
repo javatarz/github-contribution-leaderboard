@@ -6,6 +6,8 @@ pipenv shell
 ```
 
 ## Usage
+
+### CLI
 ```
 python stats.py --help
 usage: stats.py [-h] -at ACCESS_TOKEN [-m MODE] -u USERS [USERS ...]
@@ -21,6 +23,11 @@ optional arguments:
   -e END_DATE, --end-date END_DATE
                         date format YYYY-mm-dd
 ```
+
+### Web
+
+`flask run`
+
 
 ## Contributions
 Please read the [contribution guide](CONTRIBUTING.md) for detailed steps on how to contribute to this project

@@ -42,6 +42,7 @@ def test_to_dict():
                 "created_at": datetime(2020, 11, 25, 18, 35, 50)
             }
         ],
+        'avatar': 'https://avatars1.githubusercontent.com/u/5?v=4',
         "score": 13
     }
     assert user_stats().to_dict() == expected
