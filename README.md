@@ -23,4 +23,4 @@ optional arguments:
 ```
 
 ## Contributions
-Please read the [contribution guide](contributing.md) for detailed steps on how to contribute to this project
+Please read the [contribution guide](CONTRIBUTING.md) for detailed steps on how to contribute to this project

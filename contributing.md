@@ -22,6 +22,15 @@ GitHub Contibution Leaderboard (GHCL) is an open source project and we love to r
 This project and everyone participating in it is governed by the [GHCL Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [karun@japhet.in](mailto:karun@japhet.in).
 
 ## Contributing
+
+Every PR/commit on this repository will be run through a build pipeline to ensure all tests/lint checks pass.
+
+### Executing tests
+`pipenv run pytest`
+
+### Running lint checks
+`./lint.sh`
+
 ### Your first contribution
 Unsure where to begin contributing to GHCL? You can start by looking through these
 
