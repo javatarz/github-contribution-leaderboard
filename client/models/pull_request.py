@@ -47,7 +47,8 @@ class PullRequest:
         else:
             return 0
 
-    def created_between(self, start_date: datetime, end_date: datetime) -> bool:
+    def created_between(self, start_date: datetime,
+                        end_date: datetime) -> bool:
         return start_date <= self._created_at <= end_date
 
     def summary(self) -> str:

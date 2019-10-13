@@ -34,10 +34,12 @@ def parse_args():
     parser.add_argument('-u', '--users', dest='users',
                         nargs='+', required=True, type=str)
 
-    parser.add_argument('-s', '--start-date', dest='start_date', help="date format YYYY-mm-dd",
-                        required=False, default=None, type=valid_date)
-    parser.add_argument('-e', '--end-date', dest='end_date', help="date format YYYY-mm-dd",
-                        required=False, default=None, type=valid_date)
+    parser.add_argument('-s', '--start-date', dest='start_date',
+                        help="date format YYYY-mm-dd", required=False,
+                        default=None, type=valid_date)
+    parser.add_argument('-e', '--end-date', dest='end_date',
+                        help="date format YYYY-mm-dd", required=False,
+                        default=None, type=valid_date)
 
     return vars(parser.parse_args())
 
