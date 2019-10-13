@@ -1,8 +1,8 @@
 ## Installation
 ```bash
-virtualenv -p python3 env
-source ./env/bin/activate
-pip install pipenv
+pip3 install pipenv
+pipenv install --dev
+pipenv shell
 ```
 
 ## Usage
