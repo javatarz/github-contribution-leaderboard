@@ -1,0 +1,25 @@
+{
+    "issues_data": {
+        "pull_request": {
+            "html_url": ""
+        },
+        "state": "",
+        "labels": [],
+        "created_at": ""
+    },
+    "pr_data": {
+        "base": {
+            "repo": {
+                "owner": {
+                    "login": ""
+                }
+            }
+        },
+        "head": {
+            "user": {
+                "login": ""
+            }
+        },
+        "merged": true
+    }
+}

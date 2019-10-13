@@ -26,10 +26,10 @@ class PullRequest:
     def _self_pr_score(self) -> int:
         if self._merged:
             return 5
-        elif self._state == 'closed':
-            return 1
         elif self.is_spam():
             return -10
+        elif self._state == 'closed':
+            return 1
         elif self._state == 'open':
             return 1
         else:
@@ -38,10 +38,10 @@ class PullRequest:
     def _pr_score(self) -> int:
         if self._merged:
             return 10
-        elif self._state == 'closed':
-            return 3
         elif self.is_spam():
             return -5
+        elif self._state == 'closed':
+            return 3
         elif self._state == 'open':
             return 1
         else:
