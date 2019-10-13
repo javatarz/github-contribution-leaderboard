@@ -16,8 +16,8 @@ class Contributions:
                  for user_name in user_names]
         return sorted(stats, key=lambda stat: stat._score, reverse=True)
 
-    def _user_score(self, user_name: str,
-                    start_date: datetime = None, end_date: datetime = None) -> UserStats:
+    def _user_score(self, user_name: str, start_date: datetime = None,
+                    end_date: datetime = None) -> UserStats:
         prs = self._client.list_of_prs(user_name)
         user_id = self._client.user_id_from_name(user_name)
         filtered_prs = Contributions._filter_prs(prs, start_date, end_date)
