@@ -21,3 +21,6 @@ optional arguments:
   -e END_DATE, --end-date END_DATE
                         date format YYYY-mm-dd
 ```
+
+## Contributions
+Please read the [contribution guide](contributing.md) for detailed steps on how to contribute to this project
