@@ -5,13 +5,13 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
+pytest = "*"
 
 [packages]
 requests = "*"
 flask = "*"
 flask-jsonpify = "*"
 flask-restful = "*"
-pytest = "*"
 
 [requires]
 python_version = "3.7"
