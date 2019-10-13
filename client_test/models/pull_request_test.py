@@ -18,7 +18,7 @@ class TestDefaults:
         assert pr._created_at == datetime(2014, 4, 24, 16, 34, 47)
         assert pr._owner == 'owner_user_id'
         assert pr._pr_raised_by == 'pr_raised_by_user_id'
-        assert pr._merged == False
+        assert pr._merged is False
 
     @staticmethod
     def test_summary():
@@ -34,7 +34,7 @@ class TestIsSpam:
         data = _input.data
         pr = PullRequest(**data)
 
-        assert pr.is_spam() == False
+        assert pr.is_spam() is False
 
     @staticmethod
     def test_should_be_spam_when_labels_contain_invalid():
@@ -72,7 +72,7 @@ class TestCreatedBetween:
         assert pr.created_between(
             start_date=datetime(2020, 1, 1),
             end_date=datetime(2021, 1, 1)
-        ) == False
+        ) is False
 
     @staticmethod
     def test_created_at_start():
