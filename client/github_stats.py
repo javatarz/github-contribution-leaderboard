@@ -16,7 +16,8 @@ class GithubStats:
         params = dict(
             q=f'is:pr author:{user_id} archived:false',
             sort='created',
-            order='asc'
+            order='desc',
+            per_page='100'
         )
 
         items = self._request(url=url, params=params)['items']
