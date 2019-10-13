@@ -1,5 +1,5 @@
 from datetime import datetime
-from client_test.models.pr_test_data import PRData
+from ghcl_test.models.pr_test_data import PRData
 
 
 _input = PRData().with_defaults()

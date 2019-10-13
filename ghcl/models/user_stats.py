@@ -1,15 +1,17 @@
 from typing import List
-from client.models.pull_request import PullRequest
+from ghcl.models.pull_request import PullRequest
 
 
 class UserStats:
-    def __init__(self, user_id: str, prs: List[PullRequest], score: int):
+    def __init__(self, user_id: str, user_name: str, prs: List[PullRequest],
+                 score: int):
         self._user_id = user_id
+        self._user_name = user_name
         self._prs = prs
         self._score = score
 
     def leaderboard_data(self) -> str:
-        user_part = f"User: {self._user_id}"
+        user_part = f"User: {self._user_name}"
         score_part = f"Score: {self._score}"
         prs_part = f"PRs: {len(self._prs)}"
         return f"{user_part} - {score_part} ({prs_part})"
@@ -25,3 +27,10 @@ class UserStats:
 
     def all_data(self) -> str:
         return self.prs_data(with_date=True)
+
+    def to_dict(self):
+        return {
+            "user_name": self._user_name,
+            "prs": [pr.to_dict() for pr in self._prs],
+            "score": self._score
+        }
