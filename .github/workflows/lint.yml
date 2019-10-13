@@ -1,4 +1,4 @@
-name: GHCL Build
+name: Lint
 
 on: [push]
 
