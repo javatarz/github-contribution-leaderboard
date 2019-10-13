@@ -51,8 +51,12 @@ class PullRequest:
                         end_date: datetime) -> bool:
         return start_date <= self._created_at <= end_date
 
-    def summary(self) -> str:
-        return f"URL: {self._url} | Score: {self.score()}"
+    def summary(self, with_date: bool = False) -> str:
+        if with_date:
+            date_summary = f" | Created at: {self._created_at}"
+        else:
+            date_summary = ""
+        return f"URL: {self._url} | Score: {self.score()}{date_summary}"
 
     @staticmethod
     def _parse_date(date_str: str) -> datetime:
