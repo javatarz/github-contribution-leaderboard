@@ -25,7 +25,7 @@ class Contributions:
 
     @staticmethod
     def _filter_prs(prs: List[PullRequest], start_date: datetime = None, end_date: datetime = None) -> List[PullRequest]:
-        if start_date != None and end_date != None:
+        if start_date is not None and end_date is not None:
             return [pr for pr in prs if pr.created_between(start_date, end_date)]
         else:
             return prs

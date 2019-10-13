@@ -23,10 +23,10 @@ class GithubStats:
         prs = Pool(request_parallelization_count).map(
             self._to_pull_request, items)
 
-        if state == None:
+        if state is None:
             return prs
         else:
-            def stateNotEqual(pr: PullRequest) -> Boolean:
+            def stateNotEqual(pr: PullRequest) -> bool:
                 return pr._state != state
 
             return filter(stateNotEqual, prs)

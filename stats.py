@@ -1,11 +1,8 @@
-import sys
 from argparse import ArgumentParser, ArgumentTypeError
 from datetime import datetime
-from typing import List
 
 from client.contributions import Contributions
 from client.github_stats import GithubStats
-from client.models.user_stats import UserStats
 
 
 def valid_date(s: str) -> datetime:

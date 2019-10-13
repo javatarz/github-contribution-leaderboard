@@ -4,7 +4,7 @@ import copy
 
 class PRData:
     def __init__(self, data: dict = None):
-        if data == None:
+        if data is None:
             with open('./client_test/models/empty_pr_data.json') as file:
                 self.data = json.load(file)
         else:
@@ -17,7 +17,7 @@ class PRData:
 
     def with_label(self, label_to_add: str = None):
         data = copy.deepcopy(self.data)
-        if label_to_add == None:
+        if label_to_add is None:
             label_number = len(data["issues_data"]["labels"]) + 1
             label_to_add = f'label-{label_number}'
 
