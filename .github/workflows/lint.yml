@@ -18,8 +18,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev
-    - name: Linting
+    - name: Lint Python code
       run: |
         ./lint.sh
-    - name: Python Style Checker
-      uses: andymckay/pycodestyle-action@0.1.3
