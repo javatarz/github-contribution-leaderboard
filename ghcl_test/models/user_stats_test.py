@@ -1,3 +1,4 @@
+from datetime import datetime
 from ghcl.models.user_stats import UserStats
 from ghcl_test.models.pr_test_data import PRData
 
@@ -26,6 +27,26 @@ def test_all():
     assert user_stats().all_data() == expected
 
 
+def test_to_dict():
+    expected = {
+        "user_name": "Apple",
+        "prs": [
+            {
+                "url": "some-url",
+                "score": 3,
+                "created_at": datetime(2010, 12, 24, 16, 34, 47)
+            },
+            {
+                "url": "some-url",
+                "score": 10,
+                "created_at": datetime(2020, 11, 25, 18, 35, 50)
+            }
+        ],
+        "score": 13
+    }
+    assert user_stats().to_dict() == expected
+
+
 def user_stats():
     pull_request_1 = PRData().with_defaults().with_created_at(
         '2010-12-24T16:34:47Z').with_state('closed').as_pull_request()
@@ -33,7 +54,7 @@ def user_stats():
     pull_request_2 = PRData().with_defaults().with_created_at(
         '2020-11-25T18:35:50Z').with_merged(True).as_pull_request()
 
-    pull_requests = [pull_request_1, pull_request_2]
-    score = sum(pr.score() for pr in pull_requests)
+    prs = [pull_request_1, pull_request_2]
+    score = sum(pr.score() for pr in prs)
 
-    return UserStats("Apple", pull_requests, score)
+    return UserStats(user_id=5, user_name="Apple", prs=prs, score=score)

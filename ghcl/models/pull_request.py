@@ -65,3 +65,10 @@ class PullRequest:
     @staticmethod
     def _label_names(labels: List[dict]) -> List[str]:
         return [label['name'] for label in labels]
+
+    def to_dict(self):
+        return {
+            "url": self._url,
+            "score": self.score(),
+            "created_at": self._created_at
+        }
