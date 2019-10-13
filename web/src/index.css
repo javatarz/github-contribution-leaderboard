@@ -1,0 +1,52 @@
+body {
+  background: #152347;
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Space Mono', monospace;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #a11ec6;
+  box-shadow: 0 0 14px #a11ec6;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+table {
+  width: 60%;
+  text-align: right;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
+th {
+  width: 50%;
+  color: #fff922;
+}
+
+th, td {
+  padding: 10px;
+}
+
+td img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+td:first-child {
+  display: flex;
+  align-items: center;
+}
+
+td:first-child span {
+  padding-left: 20px;
+}
