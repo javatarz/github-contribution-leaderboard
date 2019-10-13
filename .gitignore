@@ -5,5 +5,8 @@
 # Python compilation
 __pycache__/
 
+# OS Specific
+.DS_Store
+
 # Flask secrets
 instance/

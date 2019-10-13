@@ -29,7 +29,9 @@ class UserStats:
         return self.prs_data(with_date=True)
 
     def to_dict(self):
+        id = self._user_id
         return {
+            "avatar": f"https://avatars1.githubusercontent.com/u/{id}?v=4",
             "user_name": self._user_name,
             "prs": [pr.to_dict() for pr in self._prs],
             "score": self._score

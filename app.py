@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, send_from_directory
 
 from ghcl.contributions import Contributions
 from ghcl.github_stats import GithubStats
@@ -10,7 +10,7 @@ app.config.from_pyfile('secrets.py')
 
 
 @app.route('/data.json')
-def index():
+def data():
     access_token = app.config['ACCESS_TOKEN']
     users = app.config['USERS']
     start_date = valid_date(app.config['START_DATE'])
@@ -21,3 +21,8 @@ def index():
     dicts = [stat.to_dict() for stat in stats]
 
     return make_response(jsonify(dicts), 200)
+
+
+@app.route('/<path:path>')
+def send_js(path):
+    return send_from_directory('web/src', path)
