@@ -1,2 +1,8 @@
+# Editor specific
 .vscode/
+
+# Python compilation
 __pycache__/
+
+# Flask secrets
+instance/

@@ -10,11 +10,11 @@ class GithubStats:
     def __init__(self, access_token):
         self._request_headers = {'Authorization': f'token {access_token}'}
 
-    def list_of_prs(self, user_id: str, state=None,
+    def list_of_prs(self, user_name: str, state=None,
                     request_parallelization_count=5) -> List[PullRequest]:
         url = 'https://api.github.com/search/issues'
         params = dict(
-            q=f'is:pr author:{user_id} archived:false',
+            q=f'is:pr author:{user_name} archived:false',
             sort='created',
             order='desc',
             per_page='100'
@@ -31,6 +31,10 @@ class GithubStats:
                 return pr._state != state
 
             return filter(stateNotEqual, prs)
+
+    def user_id_from_name(self, user_name: str) -> str:
+        url = f"https://api.github.com/users/{user_name}"
+        return self._request(url)['id']
 
     def _to_pull_request(self, issues_data: dict) -> PullRequest:
         pr_data = self._request(issues_data['pull_request']['url'])
