@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List
 
-from client.models.pull_request import PullRequest
-from client.models.user_stats import UserStats
+from ghcl.models.pull_request import PullRequest
+from ghcl.models.user_stats import UserStats
 
 
 class Contributions:

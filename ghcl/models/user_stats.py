@@ -1,5 +1,5 @@
 from typing import List
-from client.models.pull_request import PullRequest
+from ghcl.models.pull_request import PullRequest
 
 
 class UserStats:

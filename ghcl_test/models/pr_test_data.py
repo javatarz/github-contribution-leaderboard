@@ -1,13 +1,13 @@
 import copy
 import json
 
-from client.models.pull_request import PullRequest
+from ghcl.models.pull_request import PullRequest
 
 
 class PRData:
     def __init__(self, data: dict = None):
         if data is None:
-            with open('./client_test/models/empty_pr_data.json') as file:
+            with open('./ghcl_test/models/empty_pr_data.json') as file:
                 self._data = json.load(file)
         else:
             self._data = data

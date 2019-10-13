@@ -1,5 +1,5 @@
-from client.models.user_stats import UserStats
-from client_test.models.pr_test_data import PRData
+from ghcl.models.user_stats import UserStats
+from ghcl_test.models.pr_test_data import PRData
 
 
 def test_leaderboard():
