@@ -6,8 +6,7 @@ from utils.args import valid_date, valid_mode
 from web import app
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/data.json')
 def index():
     access_token = app.config['ACCESS_TOKEN']
     users = app.config['USERS']
