@@ -3,7 +3,8 @@ from ghcl.models.pull_request import PullRequest
 
 
 class UserStats:
-    def __init__(self, user_id: str, user_name: str, prs: List[PullRequest], score: int):
+    def __init__(self, user_id: str, user_name: str, prs: List[PullRequest],
+                 score: int):
         self._user_id = user_id
         self._user_name = user_name
         self._prs = prs
@@ -30,7 +31,6 @@ class UserStats:
     def to_dict(self):
         return {
             "user_name": self._user_name,
-            # "avatar": f"https://avatars1.githubusercontent.com/u/{self._user_id}?v=4",
             "prs": [pr.to_dict() for pr in self._prs],
             "score": self._score
         }
