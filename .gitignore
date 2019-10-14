@@ -10,3 +10,6 @@ __pycache__/
 
 # Flask secrets
 instance/
+
+# Pytest cache folder
+pytest_cache/
