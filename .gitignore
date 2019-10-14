@@ -12,4 +12,4 @@ __pycache__/
 instance/
 
 # Pytest cache folder
-pytest_cache/
+.pytest_cache/
