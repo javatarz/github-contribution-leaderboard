@@ -7,7 +7,7 @@ from ghcl.models.pull_request import PullRequest
 class PRData:
     def __init__(self, data: dict = None):
         if data is None:
-            with open('./ghcl_test/models/empty_pr_data.json') as file:
+            with open('./tests/models/empty_pr_data.json') as file:
                 self._data = json.load(file)
         else:
             self._data = data
