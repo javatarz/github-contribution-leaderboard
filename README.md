@@ -1,3 +1,4 @@
+![Test](https://github.com/javatarz/github-contribution-leaderboard/workflows/Test/badge.svg)
 ## Installation
 ```bash
 pip3 install pipenv
