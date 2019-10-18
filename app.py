@@ -1,4 +1,9 @@
-from flask import Flask, jsonify, make_response, send_from_directory
+from flask import (Flask,
+        jsonify,
+        make_response,
+        send_from_directory,
+        redirect,
+        url_for)
 
 from ghcl.contributions import Contributions
 from ghcl.github_stats import GithubStats
@@ -24,6 +29,11 @@ def data():
 @app.route('/<path:path>')
 def send_js(path):
     return send_from_directory('web/src', path)
+
+
+@app.route('/')
+def index():
+    return redirect(url_for('data'))
 
 
 if __name__ == '__main__':
