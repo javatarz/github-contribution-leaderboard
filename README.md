@@ -26,7 +26,7 @@ optional arguments:
                         date format YYYY-mm-dd
   -e END_DATE, --end-date END_DATE
                         date format YYYY-mm-dd
-                        
+
 example:
 python stats.py \
 -at f1a6f157cff1d9aa284350a71a813a25788f3be3 \
@@ -38,11 +38,10 @@ python stats.py \
 
 ### Web
 
-- Create a folder named `instance` with two files named `config.py` and `secrets.py`
+- Create a folder named `instance` with three files named `config.py`, `users.json` and `secrets.py`
 - `config.py` should look like this;
 
   ```python
-  USERS = ['javatarz', 'mojombo', 'defunkt']
   START_DATE = '2019-10-01'
   END_DATE = '2019-10-31'
   ```
@@ -50,6 +49,16 @@ python stats.py \
 
   ```python
   ACCESS_TOKEN = 'YOUR_GITHUB_ACCESS_TOKEN'
+  ```
+
+- `users.json` should look like this;
+  ```json
+    {
+      "users": [
+        "user1",
+        "user2"
+      ]
+    }
   ```
 
 - Start the application;
