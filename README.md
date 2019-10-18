@@ -58,7 +58,6 @@ python stats.py \
   flask run
   ```
 
-Add instance folder with :
 
 ## Contributions
 Please read the [contribution guide](CONTRIBUTING.md) for detailed steps on how to contribute to this project
