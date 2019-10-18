@@ -5,8 +5,6 @@ from ghcl.github_stats import GithubStats
 from utils.args import valid_date
 
 app = Flask(__name__, instance_relative_config=True)
-app.config.from_pyfile('config.py')
-app.config.from_pyfile('secrets.py')
 
 
 @app.route('/data.json')
@@ -26,3 +24,9 @@ def data():
 @app.route('/<path:path>')
 def send_js(path):
     return send_from_directory('web/src', path)
+
+
+if __name__ == '__main__':
+    app.config.from_pyfile('config.py')
+    app.config.from_pyfile('secrets.py')
+    app.run()
