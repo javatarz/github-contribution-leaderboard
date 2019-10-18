@@ -8,7 +8,6 @@ from ghcl.models.pull_request import PullRequest
 
 
 class GithubStats:
-
     def __init__(self, access_token):
         self._request_headers = {'Authorization': f'token {access_token}'}
 
