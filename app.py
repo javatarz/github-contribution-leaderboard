@@ -10,15 +10,14 @@ app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile('config.py')
 app.config.from_pyfile('secrets.py')
 
-
 @app.route('/data.json')
 def data():
     access_token = app.config['ACCESS_TOKEN']
     start_date = valid_date(app.config['START_DATE'])
     end_date = valid_date(app.config['END_DATE'])
-
+    users = load_users()
     contribs = Contributions(GithubStats(access_token=access_token))
-    stats = contribs.leaderboard(load_users(), start_date, end_date)
+    stats = contribs.leaderboard(users, start_date, end_date)
     dicts = [stat.to_dict() for stat in stats]
 
     return make_response(jsonify(dicts), 200)
@@ -30,11 +29,11 @@ def send_js(path):
 
 def load_users():
     users = []
-    users_file = "instance/users.json"
-    if path.isfile(users_file):
-        with open(users_file) as f:
-            try:
-                users = json.load(f)['users']
-            except ValueError as e:
-                return users
+    user_file_name = app.config['USER_DATA_FILE']
+    try:
+        users = json.loads(open(user_file_name).read())['users']
+    except json.decoder.JSONDecodeError:
+        print("cannot parse users")
+    except FileNotFoundError:
+        print(f"{user_file_name} not present")
     return users
