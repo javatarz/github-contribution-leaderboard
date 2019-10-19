@@ -14,7 +14,6 @@ requests = "*"
 flask = "*"
 flask-jsonpify = "*"
 flask-restful = "*"
-redis = "*"
 
 [requires]
 python_version = "3.7"
