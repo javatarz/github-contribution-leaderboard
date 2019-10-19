@@ -10,7 +10,7 @@ class TestDefaults:
     def test_should_create_pull_request():
         pr = _input.as_pull_request()
 
-        assert pr._url == 'some-url'
+        assert pr._html_url == 'some-html-url'
         assert pr._state == 'some_state'
         assert pr._labels == ['label-1', 'label-2']
         assert pr._created_at == datetime(2014, 4, 24, 16, 34, 47)
@@ -22,18 +22,19 @@ class TestDefaults:
     def test_summary():
         pr = _input.as_pull_request()
 
-        assert pr.summary() == 'URL: some-url | Score: 0'
+        assert pr.summary() == 'URL: some-html-url | Score: 0'
 
     @staticmethod
     def test_summary_without_date():
         pr = _input.as_pull_request()
 
-        assert pr.summary(False) == 'URL: some-url | Score: 0'
+        assert pr.summary(False) == 'URL: some-html-url | Score: 0'
 
     @staticmethod
     def test_summary_with_date():
         pr = _input.as_pull_request()
-        expected = 'URL: some-url | Score: 0 | Created at: 2014-04-24 16:34:47'
+        expected = \
+            'URL: some-html-url | Score: 0 | Created at: 2014-04-24 16:34:47'
 
         assert pr.summary(True) == expected
 

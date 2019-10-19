@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List
 
 from ghcl.models.pull_request import PullRequest
+from ghcl.models.pull_request_lite import LitePullRequest
 from ghcl.models.user_stats import UserStats
 
 
@@ -17,21 +18,27 @@ class Contributions:
         return sorted(stats, key=lambda stat: stat._score, reverse=True)
 
     def _user_score(self, user_name: str, start_date: datetime = None,
-                    end_date: datetime = None) -> UserStats:
-        prs = self._client.list_of_prs(user_name)
+                    end_date: datetime = None,
+                    request_parallelization_count=5) -> UserStats:
+        lite_prs = self._client.list_of_prs(user_name)
+        in_window_lite_prs = Contributions._filter_prs(
+            lite_prs, start_date, end_date)
+
+        in_window_prs = list(
+            map(self._client.fetch_pr_data, in_window_lite_prs)
+        )
         user_id = self._client.user_id_from_name(user_name)
-        filtered_prs = Contributions._filter_prs(prs, start_date, end_date)
 
         return UserStats(
             user_id=user_id,
             user_name=user_name,
-            prs=filtered_prs,
-            score=Contributions._score(filtered_prs)
+            prs=in_window_prs,
+            score=Contributions._score(in_window_prs)
         )
 
     @staticmethod
-    def _filter_prs(prs: List[PullRequest], start_date: datetime = None,
-                    end_date: datetime = None) -> List[PullRequest]:
+    def _filter_prs(prs: List[LitePullRequest], start_date: datetime = None,
+                    end_date: datetime = None) -> List[LitePullRequest]:
         if start_date is not None and end_date is not None:
             return [p for p in prs if p.created_between(start_date, end_date)]
         else:

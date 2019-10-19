@@ -2,6 +2,7 @@ import copy
 import json
 
 from ghcl.models.pull_request import PullRequest
+from ghcl.models.pull_request_lite import LitePullRequest
 
 
 class PRData:
@@ -12,9 +13,11 @@ class PRData:
         else:
             self._data = data
 
-    def with_pr_url(self, url: str = 'some-url'):
+    def with_pr_url(self, html_url: str = 'some-html-url',
+                    url: str = 'some-url'):
         data = copy.deepcopy(self._data)
-        data['issues_data']['pull_request']['html_url'] = url
+        data['issues_data']['pull_request']['html_url'] = html_url
+        data['issues_data']['pull_request']['url'] = url
         return PRData(data)
 
     def with_label(self, label_to_add: str = None):
@@ -62,4 +65,8 @@ class PRData:
             .with_state()
 
     def as_pull_request(self):
-        return PullRequest(**self._data)
+        data = {'lite_pr': LitePullRequest(**self._data), **self._data}
+        return PullRequest(**data)
+
+    def as_lite_pull_request(self):
+        return LitePullRequest(**self._data)
