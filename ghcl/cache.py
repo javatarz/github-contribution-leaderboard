@@ -11,7 +11,7 @@ def singleton(class_):
 @singleton
 class Cache:
   def __init__(self, cache_duration=60):
-    self.redis = redis.Redis(port=5555)
+    self.redis = redis.Redis()
     self.cache_duration=cache_duration
 
   def exists(self, cache_key) -> bool:
