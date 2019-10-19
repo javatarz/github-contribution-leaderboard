@@ -11,8 +11,8 @@ def test_leaderboard():
 
 def test_prs():
     expected = """User: Apple - Score: 13 (PRs: 2)
-  URL: some-url | Score: 3
-  URL: some-url | Score: 10
+  URL: some-html-url | Score: 3
+  URL: some-html-url | Score: 10
 """
 
     assert user_stats().prs_data() == expected
@@ -20,8 +20,8 @@ def test_prs():
 
 def test_all():
     expected = """User: Apple - Score: 13 (PRs: 2)
-  URL: some-url | Score: 3 | Created at: 2010-12-24 16:34:47
-  URL: some-url | Score: 10 | Created at: 2020-11-25 18:35:50
+  URL: some-html-url | Score: 3 | Created at: 2010-12-24 16:34:47
+  URL: some-html-url | Score: 10 | Created at: 2020-11-25 18:35:50
 """
 
     assert user_stats().all_data() == expected
@@ -32,12 +32,12 @@ def test_to_dict():
         "user_name": "Apple",
         "prs": [
             {
-                "url": "some-url",
+                "url": "some-html-url",
                 "score": 3,
                 "created_at": datetime(2010, 12, 24, 16, 34, 47)
             },
             {
-                "url": "some-url",
+                "url": "some-html-url",
                 "score": 10,
                 "created_at": datetime(2020, 11, 25, 18, 35, 50)
             }

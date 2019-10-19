@@ -1,15 +1,15 @@
-from typing import List
 from datetime import datetime
 
 
 class PullRequest:
     def __init__(self, *args, **kwargs):
-        self._url = kwargs['issues_data']['pull_request']['html_url']
-        self._state = kwargs['issues_data']['state']
-        self._labels = PullRequest._label_names(
-            kwargs['issues_data']['labels'])
-        self._created_at = PullRequest._parse_date(
-            kwargs['issues_data']['created_at'])
+        lite_pr = kwargs['lite_pr']
+
+        self._html_url = lite_pr._html_url
+        self._state = lite_pr._state
+        self._labels = lite_pr._labels
+        self._created_at = lite_pr._created_at
+
         self._owner = kwargs['pr_data']['base']['repo']['owner']['login']
         self._pr_raised_by = kwargs['pr_data']['head']['user']['login']
         self._merged = kwargs['pr_data']['merged']
@@ -56,19 +56,11 @@ class PullRequest:
             date_summary = f" | Created at: {self._created_at}"
         else:
             date_summary = ""
-        return f"URL: {self._url} | Score: {self.score()}{date_summary}"
-
-    @staticmethod
-    def _parse_date(date_str: str) -> datetime:
-        return datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
-
-    @staticmethod
-    def _label_names(labels: List[dict]) -> List[str]:
-        return [label['name'] for label in labels]
+        return f"URL: {self._html_url} | Score: {self.score()}{date_summary}"
 
     def to_dict(self):
         return {
-            "url": self._url,
+            "url": self._html_url,
             "score": self.score(),
             "created_at": self._created_at
         }
