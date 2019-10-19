@@ -1,6 +1,8 @@
 from datetime import datetime
+from multiprocessing import Pool
 from typing import List
 
+from ghcl.github_stats import GithubStats
 from ghcl.models.pull_request import PullRequest
 from ghcl.models.pull_request_lite import LitePullRequest
 from ghcl.models.user_stats import UserStats
@@ -19,15 +21,16 @@ class Contributions:
 
     def _user_score(self, user_name: str, start_date: datetime = None,
                     end_date: datetime = None,
-                    request_parallelization_count=5) -> UserStats:
+                    request_parallelization_count=10) -> UserStats:
         lite_prs = self._client.list_of_prs(user_name)
         in_window_lite_prs = Contributions._filter_prs(
             lite_prs, start_date, end_date)
-
-        in_window_prs = list(
-            map(self._client.fetch_pr_data, in_window_lite_prs)
-        )
         user_id = self._client.user_id_from_name(user_name)
+
+        with Pool(processes=request_parallelization_count) as pool:
+            in_window_prs = pool.map(
+                self._client.fetch_pr_data, in_window_lite_prs
+            )
 
         return UserStats(
             user_id=user_id,
