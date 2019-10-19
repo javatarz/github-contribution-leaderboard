@@ -2,8 +2,7 @@ from multiprocessing import Pool
 from typing import List
 
 import requests
-from ghcl.cache import Cache
-import json
+
 from ghcl.models.pull_request import PullRequest
 
 
@@ -21,16 +20,8 @@ class GithubStats:
             per_page='100'
         )
 
-        cache_key = f'cache:prs:{user_name}'
-        cache = Cache()
 
-        if(cache.exists(cache_key)):
-            print("[cached] fetching PRS")
-            items = json.loads(cache.fetch(cache_key))
-        else:
-            items = self._paginated_request(url=url, params=params)['items']
-            cache.set(cache_key, json.dumps(items))
-
+        items = self._request(url=url, params=params)['items']
         prs = Pool(request_parallelization_count).map(
             self._to_pull_request, items)
 
