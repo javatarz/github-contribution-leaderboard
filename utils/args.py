@@ -38,4 +38,8 @@ def parse_args():
                         help="date format YYYY-mm-dd", required=False,
                         default=None, type=valid_date)
 
+    parser.add_argument('-hps', '--http-pool-size', dest='http_pool_size',
+                        help='number of simultaneous API calls to fetch PRs',
+                        required=False, default=10)
+
     return vars(parser.parse_args())
