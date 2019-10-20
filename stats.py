@@ -18,11 +18,12 @@ def _stats_to_prs(t: (UserPRExperience, List[int])) -> (UserPRExperience, int):
 
 def _experience_data(stats: List[UserStats]) -> str:
     experiences = [stat.user_past_pr_experience() for stat in stats]
+    sorted_experience = sorted(experiences, key=lambda exp: exp.value[0])
 
     def _to_summary_experience(t: (UserPRExperience, int)) -> str:
         return ExperienceSummary(
             user_experience=t[0],
-            people_count=experiences.count(t[0]),
+            people_count=sorted_experience.count(t[0]),
             pr_count=t[1]
         ).summary()
 
@@ -30,7 +31,7 @@ def _experience_data(stats: List[UserStats]) -> str:
         _to_summary_experience,
         map(
             _stats_to_prs,
-            map(_stats_with_exp, experiences)
+            map(_stats_with_exp, sorted_experience)
         )
     )
 
