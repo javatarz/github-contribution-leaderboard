@@ -15,8 +15,12 @@ def data():
     users = app.config['USERS']
     start_date = valid_date(app.config['START_DATE'])
     end_date = valid_date(app.config['END_DATE'])
+    http_pool_size = app.config['HTTP_POOL_SIZE']
 
-    contribs = Contributions(GithubStats(access_token=access_token))
+    contribs = Contributions(
+        stats_client=GithubStats(access_token=access_token),
+        http_pool_size=http_pool_size
+    )
     stats = contribs.leaderboard(users, start_date, end_date)
     dicts = [stat.to_dict() for stat in stats]
 

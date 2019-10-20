@@ -11,29 +11,20 @@ pipenv shell
 ### CLI
 ```
 python stats.py --help
-usage: stats.py [-h] -at ACCESS_TOKEN [-m leaderboard, prs, all] -u USERS [USERS ...]
-                [-s START_DATE] [-e END_DATE]
+usage: stats.py [-h] -at ACCESS_TOKEN [-m MODE] -u USERS [USERS ...]
+                [-s START_DATE] [-e END_DATE] [-hps HTTP_POOL_SIZE]
+stats.py: error: the following arguments are required: -at/--access-token, -u/--users
+```
 
-arguments:
-  -at ACCESS_TOKEN, --access-token ACCESS_TOKEN
-  -u USERS [USERS ...], --users USERS [USERS ...]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -m MODE, --mode MODE
-                        one of leaderboard, prs or all
-  -s START_DATE, --start-date START_DATE
-                        date format YYYY-mm-dd
-  -e END_DATE, --end-date END_DATE
-                        date format YYYY-mm-dd
-                        
 example:
-python stats.py \
+```python stats.py \
+
 -at f1a6f157cff1d9aa284350a71a813a25788f3be3 \
 -u javatarz mojombo defunkt \
 -s 2019-10-01 \
 -e 2019-10-31 \
 -m all
+-hps 10
 ```
 
 ### Web
