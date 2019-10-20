@@ -1,8 +1,10 @@
 from typing import List
 
+import requests
+from requests import Response
+
 from ghcl.models.pull_request import PullRequest
 from ghcl.models.pull_request_lite import LitePullRequest
-from ghcl.requests_wrapper import http_get
 
 
 class GithubStats:
@@ -18,25 +20,24 @@ class GithubStats:
             per_page='100'
         )
 
-        items = self._request(url=url, params=params)['items']
+        items = self._paginated_request(url=url, params=params)['items']
         return list(map(self._to_lite_pull_request, items))
 
     def user_id_from_name(self, user_name: str) -> str:
         url = f"https://api.github.com/users/{user_name}"
-        return self._request(url)['id']
+        return self._request(url).json()['id']
 
     def fetch_pr_data(self, lite_pr: LitePullRequest) -> PullRequest:
-        pr_data = self._request(lite_pr.pull_request_url)
+        pr_data = self._request(lite_pr.pull_request_url).json()
         kwargs = {
             'lite_pr': lite_pr,
             'pr_data': pr_data
         }
         return PullRequest(**kwargs)
 
-    def _to_lite_pull_request(self,
-                              issues_data: dict) -> LitePullRequest:
-        all_data = {'issues_data': {**issues_data}}
-        return LitePullRequest(**all_data)
+    def _to_lite_pull_request(self, issues_data: dict) -> LitePullRequest:
+        data_wrapper = {'issues_data': {**issues_data}}
+        return LitePullRequest(**data_wrapper)
 
     def _paginated_request(self, url: str, params: dict = None) -> dict:
         response = self._request(url, params)
@@ -46,10 +47,15 @@ class GithubStats:
                 url=response.links['next']['url'],
                 params=params
             )
-            if 'items' in response.keys():
-                aggregate_response += (response['items'])
+            response_json = response.json()
+            if 'items' in response_json.keys():
+                aggregate_response += (response_json['items'])
         res = {'items': aggregate_response}
         return res
 
-    def _request(self, url: str, params: dict = None) -> dict:
-        return http_get(url, params, request_headers=self._request_headers)
+    def _request(self, url: str, params: dict = None) -> Response:
+        return requests.get(
+            url=url,
+            params=params,
+            headers=self._request_headers
+        )
