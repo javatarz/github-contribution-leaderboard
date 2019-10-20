@@ -4,16 +4,17 @@ from ghcl.models.pull_request import PullRequest
 
 class UserStats:
     def __init__(self, user_id: str, user_name: str, prs: List[PullRequest],
-                 score: int):
+                 score: int, total_count: int):
         self._user_id = user_id
         self._user_name = user_name
         self._prs = prs
         self._score = score
+        self._total_count = total_count
 
     def leaderboard_data(self) -> str:
         user_part = f"User: {self._user_name}"
         score_part = f"Score: {self._score}"
-        prs_part = f"PRs: {len(self._prs)}"
+        prs_part = f"PRs: {len(self._prs)} | Total PRs: {self._total_count}"
         return f"{user_part} - {score_part} ({prs_part})"
 
     def prs_data(self, with_date: bool = False) -> str:
