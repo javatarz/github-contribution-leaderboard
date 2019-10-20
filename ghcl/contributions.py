@@ -22,7 +22,7 @@ class Contributions:
 
     def _user_score(self, user_name: str, start_date: datetime = None,
                     end_date: datetime = None) -> UserStats:
-        lite_prs = self._client.list_of_prs(user_name)
+        total_count, lite_prs = self._client.list_of_prs(user_name)
         in_window_lite_prs = Contributions._filter_prs(
             lite_prs, start_date, end_date)
         user_id = self._client.user_id_from_name(user_name)
@@ -36,7 +36,8 @@ class Contributions:
             user_id=user_id,
             user_name=user_name,
             prs=in_window_prs,
-            score=Contributions._score(in_window_prs)
+            score=Contributions._score(in_window_prs),
+            total_count=total_count
         )
 
     @staticmethod

@@ -11,7 +11,7 @@ class GithubStats:
     def __init__(self, access_token):
         self._request_headers = {'Authorization': f'token {access_token}'}
 
-    def list_of_prs(self, user_name: str) -> List[LitePullRequest]:
+    def list_of_prs(self, user_name: str) -> (int, List[LitePullRequest]):
         url = 'https://api.github.com/search/issues'
         params = dict(
             q=f'is:pr author:{user_name} archived:false',
@@ -20,8 +20,12 @@ class GithubStats:
             per_page='100'
         )
 
-        items = self._paginated_request(url=url, params=params)['items']
-        return list(map(self._to_lite_pull_request, items))
+        response = self._paginated_request(url=url, params=params)
+        items = response['items']
+        return (
+            response['total_prs'],
+            list(map(self._to_lite_pull_request, items))
+        )
 
     def user_id_from_name(self, user_name: str) -> str:
         url = f"https://api.github.com/users/{user_name}"
@@ -41,7 +45,8 @@ class GithubStats:
 
     def _paginated_request(self, url: str, params: dict = None) -> dict:
         response = self._request(url, params)
-        aggregate_response = response.json()['items']
+        response_json = response.json()
+        aggregate_response = response_json['items']
         while 'next' in response.links.keys():
             response = self._request(
                 url=response.links['next']['url'],
@@ -50,8 +55,10 @@ class GithubStats:
             response_json = response.json()
             if 'items' in response_json.keys():
                 aggregate_response += (response_json['items'])
-        res = {'items': aggregate_response}
-        return res
+        return {
+            'items': aggregate_response,
+            'total_prs': response_json['total_count']
+        }
 
     def _request(self, url: str, params: dict = None) -> Response:
         return requests.get(

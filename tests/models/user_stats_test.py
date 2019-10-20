@@ -4,13 +4,13 @@ from tests.models.pr_test_data import PRData
 
 
 def test_leaderboard():
-    expected = "User: Apple - Score: 13 (PRs: 2)"
+    expected = "User: Apple - Score: 13 (PRs: 2 | Total PRs: 10)"
 
     assert user_stats().leaderboard_data() == expected
 
 
 def test_prs():
-    expected = """User: Apple - Score: 13 (PRs: 2)
+    expected = """User: Apple - Score: 13 (PRs: 2 | Total PRs: 10)
   URL: some-html-url | Score: 3
   URL: some-html-url | Score: 10
 """
@@ -19,7 +19,7 @@ def test_prs():
 
 
 def test_all():
-    expected = """User: Apple - Score: 13 (PRs: 2)
+    expected = """User: Apple - Score: 13 (PRs: 2 | Total PRs: 10)
   URL: some-html-url | Score: 3 | Created at: 2010-12-24 16:34:47
   URL: some-html-url | Score: 10 | Created at: 2020-11-25 18:35:50
 """
@@ -58,4 +58,10 @@ def user_stats():
     prs = [pull_request_1, pull_request_2]
     score = sum(pr.score() for pr in prs)
 
-    return UserStats(user_id=5, user_name="Apple", prs=prs, score=score)
+    return UserStats(
+        user_id=5,
+        user_name="Apple",
+        prs=prs,
+        score=score,
+        total_count=10
+    )
