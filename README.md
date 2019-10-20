@@ -14,7 +14,7 @@ Go to [Settings > Developer Settings > Personal Access Token](https://github.com
 If you lose it, come back to the [Personal Access Token](https://github.com/settings/tokens) page, delete the old token and generate the new one.
 
 #### Token security
-Keep this token safe. It maps to your ID. *DO NOT* share it with anyone. *DO NOT* check in the token anywhere.
+Keep this token safe. It maps to your ID. **DO NOT** share it with anyone. **DO NOT** check in the token anywhere.
 
 If the token gets compromised, [reset it](#generating-a-token).
 
