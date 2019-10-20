@@ -1,6 +1,7 @@
 import pytest
 
-from ghcl.models.user_experience import OutOfRangeException, UserPRExperience
+from ghcl.models.user_experience \
+    import OutOfRangeException, UserPRExperience, ExperienceSummary
 
 
 @pytest.mark.parametrize(
@@ -51,3 +52,31 @@ def test_raise_error_for_out_of_range_pr_count():
     with pytest.raises(OutOfRangeException) as exception_info:
         assert UserPRExperience.find(input) is None
     assert exception_info.value.args[0] == input
+
+
+def test_experience_summary():
+    expected = '  first_timers: 2 PRs by 10 people'
+    actual = ExperienceSummary(UserPRExperience.first_timers, 10, 2).summary()
+
+    assert actual == expected
+
+
+def test_experience_summary_for_multiple_prs_by_a_person():
+    expected = '  first_timers: 2 PRs by 1 person'
+    actual = ExperienceSummary(UserPRExperience.first_timers, 1, 2).summary()
+
+    assert actual == expected
+
+
+def test_experience_summary_for_a_pr_by_multiple_people():
+    expected = '  first_timers: 1 PR by 10 people'
+    actual = ExperienceSummary(UserPRExperience.first_timers, 10, 1).summary()
+
+    assert actual == expected
+
+
+def test_experience_summary_for_a_pr_by_a_person():
+    expected = '  first_timers: 1 PR by 1 person'
+    actual = ExperienceSummary(UserPRExperience.first_timers, 1, 1).summary()
+
+    assert actual == expected

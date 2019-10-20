@@ -30,5 +30,12 @@ class ExperienceSummary:
         self._pr_count = pr_count
 
     def summary(self) -> str:
-        result = f'{self._pr_count} PRs by {self._people_count} people'
-        return f"  {self._user_experience.name}: {result}"
+        pr_suffix = 's' if self._pr_count != 1 else ''
+        pr_summary = f'{self._pr_count} PR{pr_suffix}'
+
+        people_suffix = 'people' if self._people_count != 1 else 'person'
+        people_summary = f'{self._people_count} {people_suffix}'
+
+        user_summary = f'{pr_summary} by {people_summary}'
+
+        return f"  {self._user_experience.name}: {user_summary}"
