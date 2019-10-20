@@ -13,3 +13,6 @@ instance/
 
 # Pytest cache folder
 .pytest_cache/
+
+# Pytest Code Coverage
+.coverage

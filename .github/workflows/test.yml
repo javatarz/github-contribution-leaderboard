@@ -20,4 +20,10 @@ jobs:
         pipenv install --dev
     - name: Test with pytest
       run: |
-        pipenv run pytest
+        pipenv run pytest --cov=./ --cov-report=xml
+    - uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage.xml
+        flags: unittests
+        name: ghcl
