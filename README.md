@@ -21,10 +21,10 @@ If the token gets compromised, [reset it](#generating-a-token).
 
 ### CLI
 ```
-python stats.py --help
 usage: stats.py [-h] -at ACCESS_TOKEN [-m MODE] -u USERS [USERS ...]
-                [-s START_DATE] [-e END_DATE] [-hps HTTP_POOL_SIZE]
-stats.py: error: the following arguments are required: -at/--access-token, -u/--users
+                [-s START_DATE] [-e END_DATE] [-hps HTTP_POOL_SIZE] [-ws]
+                [-wns]
+stats.py: error: the following arguments are required: -u/--users
 ```
 
 example:

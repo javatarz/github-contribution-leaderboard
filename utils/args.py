@@ -42,4 +42,14 @@ def parse_args():
                         help='number of simultaneous API calls to fetch PRs',
                         required=False, default=10)
 
+    summary_help = 'print summary for overall number of stats.\
+        this is only applicable for CLI executions'
+    parser.add_argument('-ws', '--with-summary',
+                        help=summary_help,
+                        dest='with_summary', action='store_true')
+    parser.add_argument('-wns', '--with-no-feature',
+                        help='disable summary mode',
+                        dest='with_summary', action='store_false')
+    parser.set_defaults(with_summary=False)
+
     return vars(parser.parse_args())

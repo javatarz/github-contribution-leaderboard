@@ -9,12 +9,12 @@ class UserStats:
         self._user_name = user_name
         self._prs = prs
         self._score = score
-        self._total_count = total_count
+        self.total_count = total_count
 
     def leaderboard_data(self) -> str:
         user_part = f"User: {self._user_name}"
         score_part = f"Score: {self._score}"
-        prs_part = f"PRs: {len(self._prs)} | Total PRs: {self._total_count}"
+        prs_part = f"PRs: {len(self._prs)} | Total PRs: {self.total_count}"
         return f"{user_part} - {score_part} ({prs_part})"
 
     def prs_data(self, with_date: bool = False) -> str:
@@ -28,6 +28,9 @@ class UserStats:
 
     def all_data(self) -> str:
         return self.prs_data(with_date=True)
+
+    def pr_count(self) -> int:
+        return len(self._prs)
 
     def to_dict(self):
         id = self._user_id
