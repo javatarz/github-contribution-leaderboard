@@ -1,5 +1,7 @@
 from typing import List
+
 from ghcl.models.pull_request import PullRequest
+from ghcl.models.user_experience import UserPRExperience
 
 
 class UserStats:
@@ -31,6 +33,10 @@ class UserStats:
 
     def pr_count(self) -> int:
         return len(self._prs)
+
+    def user_past_pr_experience(self) -> UserPRExperience:
+        pr_count_before_period = self.total_count - self.pr_count()
+        return UserPRExperience.find(pr_count_before_period)
 
     def to_dict(self):
         id = self._user_id

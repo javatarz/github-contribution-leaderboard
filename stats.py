@@ -26,7 +26,7 @@ if args['with_summary']:
     print(f"Users:")
     user_count = len(args['users'])
     print(f"  count: {user_count}")
-    print("PRs:")
+    print("PRs overall:")
     in_period_pr_count = sum([stat.pr_count() for stat in stats])
     print(f"  during period: {in_period_pr_count}")
     total_pr_count = sum([stat.total_count for stat in stats])
