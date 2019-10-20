@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from ghcl.models.user_experience import UserPRExperience
 from ghcl.models.user_stats import UserStats
 from tests.models.pr_test_data import PRData
 
@@ -46,6 +48,10 @@ def test_to_dict():
         "score": 13
     }
     assert user_stats().to_dict() == expected
+
+
+def test_user_pr_experience():
+    assert user_stats().user_past_pr_experience() == UserPRExperience.novice
 
 
 def user_stats():
