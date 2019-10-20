@@ -8,6 +8,16 @@ pipenv shell
 
 ## Usage
 
+### Generating a token
+Go to [Settings > Developer Settings > Personal Access Token](https://github.com/settings/tokens) and click generate a token. Give the token a name and *do not* give it any selected scope. Click generate token. Copy the token and keep it safe. You can't get the token value back from this page once you leave it.
+
+If you lose it, come back to the [Personal Access Token](https://github.com/settings/tokens) page, delete the old token and generate the new one.
+
+#### Token security
+Keep this token safe. It maps to your ID. *DO NOT* share it with anyone. *DO NOT* check in the token anywhere.
+
+If the token gets compromised, [reset it](#generating-a-token).
+
 ### CLI
 ```
 python stats.py --help
@@ -19,7 +29,7 @@ stats.py: error: the following arguments are required: -at/--access-token, -u/--
 example:
 ```python stats.py \
 
--at f1a6f157cff1d9aa284350a71a813a25788f3be3 \
+-at abcdefghijklmnopqrstuvwxyz1234567890abcd \
 -u javatarz mojombo defunkt \
 -s 2019-10-01 \
 -e 2019-10-31 \
