@@ -34,7 +34,7 @@ Every PR/commit on this repository will be run through a build pipeline to ensur
 ### Your first contribution
 Unsure where to begin contributing to GHCL? You can start by looking through these
 
-### Adding any new package
+### Adding new packages
 If you are adding any external package on project, please make you use `Pipenv’s Dependency Resolution Approach`
 
 eg: if you want to add redis package. Follow below steps
