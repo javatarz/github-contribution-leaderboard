@@ -41,6 +41,10 @@ eg: if you want to add redis package. Follow below steps
 `pipenv install redis`
 By doing this way, it'll update the Pipfile and Pipfile.lock.
 
+#### How to use pyenv?
+[Pyenv](https://pypi.org/project/pipenv/)
+
+
 * [good first issue](https://github.com/javatarz/github-contribution-leaderboard/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+sort%3Acomments-desc) - issues which should only require a few lines of code, and a test or two
 * [help-wanted issues](https://github.com/javatarz/github-contribution-leaderboard/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+sort%3Acomments-desc) - issues which should be a bit more involved than beginner issues
 
