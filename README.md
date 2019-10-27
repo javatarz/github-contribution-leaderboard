@@ -47,6 +47,8 @@ example:
   USERS = ['javatarz', 'mojombo', 'defunkt']
   START_DATE = '2019-10-01'
   END_DATE = '2019-10-31'
+  HTTP_POOL_SIZE = 10
+
   ```
 - `secrets.py` should look like this;
 
